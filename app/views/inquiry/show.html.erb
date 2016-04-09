@@ -1,0 +1,20 @@
+<div class = "container container-fluid">
+  <div class="row">
+
+      <div class = "col-md-8 col-md-offset-2" style = "background:#E6E6E6;">
+        <h2>受信メール一覧</h2>
+        <% @mail.each do |mail| %>
+        <br>
+          <b>○件名</b>
+          <h5><%= mail.subject %></h5>
+          <b>○日付</b>
+          <h5><%= mail.date.to_s %></h5>
+          <b>○本文</b>
+        <h5><%= simple_format(mail.parts.first.decoded) %></h5>
+<br>
+        <% end %>
+      </div>
+      <div class = "col-md-4 ">
+      </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Achieve</title>
+  <%= stylesheet_link_tag "bootstrap", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body>
+<script>
+$(document).ready(function() {
+    $('.js-replace-no-image').error(function() {
+        $(this).attr({
+            src: 'assets/no_image.png',
+        });
+    });
+});
+</script>
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-flag " aria-hidden="true"></span> Achieve</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">
+          <% if user_signed_in? %>
+          <li><%= link_to "投稿",  blogs_path %></li>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to "お問い合わせ一覧",  inquiryshow_path %></li>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ユーザ<span class="caret"></span></a>
+             <ul class="dropdown-menu">
+              <li><a href="#"><%= link_to "プロフィール変更", edit_user_registration_path %></a></li>
+              <li><a href="#"><%= link_to "ユーザ一覧", users_path %></a></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+             </ul>
+            </li>
+
+          <% else %>
+            <li><%= link_to "ログイン", new_user_session_path %></li>
+          <% end %>
+          <li><%= link_to "お問い合わせ", inquiry_path %></li>
+          </a></li>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+  <% if notice.present? %>
+    <div class = "col-md-4 col-md-offset-4 alert alert-success">
+      <p class="notice"><%= notice %></p>
+    </div>
+  <% end %>
+
+  <% if alert.present? %>
+      <div class = "col-md-4 col-md-offset-4 alert alert-danger">
+        <p class= "alert"><%= alert %></p>
+      </div>
+  <% end %>
+
+<%= yield %>
+<%= debug params if Rails.env.development? %>
+</body>
+</html>

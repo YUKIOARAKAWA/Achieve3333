@@ -1,0 +1,32 @@
+<div class = "container container-fluid">
+  <div class="row">
+
+      <div class = "col-md-8 " style = "background:#E6E6E6;">
+          <!--一覧 -->
+        <% @blogs.each do |blog| %>
+          <h5><%= blog.user.name %></h5>
+          <%= profile_img(blog.user)%>
+          <h5><%= simple_format(blog.content) %></h5>
+          <% if current_user.id == blog.user.id %>
+            <%= link_to "編集" , edit_blog_path(blog)%>
+          <% end %>
+          <hr>
+        <% end %>
+      </div>
+
+      <div class = "col-md-4 ">
+              <h2>投稿</h2>
+        　<!--フォーム -->
+        <%= form_for (@blog) do |f| %>
+          <%= f.label :content %><br>
+          <%= f.text_area :content, :size => "40*10" %><br>
+          <%= f.submit class: 'btn btn-primary'%>
+        <% end %>
+
+        <% flash.each do |message_type, message| %>
+          <div class="alert alert-<%= message_type %>"><%= message %></div>
+        <% end %>
+
+      </div>
+  </div>
+</div>

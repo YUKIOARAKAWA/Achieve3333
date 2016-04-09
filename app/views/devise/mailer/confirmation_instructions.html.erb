@@ -1,0 +1,6 @@
+<p>ようこそ<%= @email %></p>
+この度はachieveへ登録いただき、誠にありがとうございます。
+メールアドレスの確認が完了いたしました。
+
+下記リンクをクリックして、アカウントを有効化してください。
+<p><%= link_to '有効化', confirmation_url(@resource, confirmation_token: @token) %></p>

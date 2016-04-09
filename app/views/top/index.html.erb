@@ -1,0 +1,13 @@
+<div class = "row">
+  <div class = "col-md-4 col-md-offset-4" >
+
+<% if user_signed_in? %>
+    <%= profile_img(current_user)%>
+    <% if current_user.name == "" %>
+    こんにちは、ゲストさん<br>プロフィール変更画面でユーザ名を設定してください。
+    <% else %>
+      こんにちは、<%= current_user.name %>さん<br>
+    <% end %>
+<% end %>
+  </div>
+</div>
